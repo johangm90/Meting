@@ -1,57 +1,92 @@
-# Meting
+<p align="center">
+<img src="https://user-images.githubusercontent.com/2666735/30165599-36623bea-93a6-11e7-8956-1ddf99ce0e6f.png" alt="Meting">
+</p>
 
-![](http://ww2.sinaimg.cn/large/a15b4afegw1fbg1l7wn09j20fw05gq34)
+<p align="center">
+<a href="https://i-meto.com"><img alt="Author" src="https://img.shields.io/badge/Author-METO-blue.svg?style=flat-square"/></a>
+<a href="https://packagist.org/packages/metowolf/Meting"><img alt="Version" src="https://img.shields.io/packagist/v/metowolf/Meting.svg?style=flat-square"/></a>
+<a href="https://packagist.org/packages/metowolf/meting/stats"><img alt="Downloads" src="https://img.shields.io/packagist/dt/metowolf/Meting.svg?style=flat-square"/></a>
+<a href="https://travis-ci.org/metowolf/Meting"><img alt="Travis" src="https://img.shields.io/travis/metowolf/Meting.svg?style=flat-square"></a>
+<img alt="License" src="https://img.shields.io/packagist/l/metowolf/Meting.svg?style=flat-square"/>
+</p>
 
- > :lollipop:Wow, such a powerful music API framework
+ > :cake: Wow, such a powerful music API framework
 
 ## Introduction
-A powerful music API framework to accelerate development
+A powerful music API framework to accelerate your development
+ + **Elegant** - Easy to use, a standardized format for all music platforms.
+ + **Lightweight** - A single-file library that's less than 46KB.
+ + **Powerful** - Support various music platforms, including Tencent, NetEase, Xiami, KuGou, Baidu and more.
+ + **Free** - Under MIT license, need I say more?
 
- + **Easy** - Easy to use, suppose format return.
- + **Light** - 32KB around with only one file.
- + **Powerful** - Suppose various webserver, include netease, tencent, xiami, kugou, baidu and more.
- + **Free** - Under MIT license, you can use it anywhere if you want.
+## Requirement
+PHP 5.4+ and BCMath, Curl, OpenSSL extension installed.
 
-## Get Started
+## Installation
+Require this package, with [Composer](https://getcomposer.org), in the root directory of your project.
 
-### Install via composer
-```
+```bash
 $ composer require metowolf/meting
 ```
 
-### Install via require
+Then you can import the class into your application:
+
 ```php
-// if you just download the Meting.php into directory, require it with the correct path.
-require_once 'Meting.php';
+use Metowolf\Meting;
+
+$api = new Meting('netease');
+
+$data = $api->format(true)->search('Soldier');
 ```
 
-### Basic usage
+> **Note:** Meting requires [BCMath](http://php.net/manual/en/book.bc.php), [cURL](http://php.net/manual/en/book.curl.php) and [OpenSSL](http://php.net/manual/en/book.openssl.php) extension in order to work.
+
+
+## Quick Start
 ```php
+require 'vendor/autoload.php';
+// require 'Meting.php';
+
+use Metowolf\Meting;
+
 // Initialize to netease API
-$API = new Meting('netease');
+$api = new Meting('netease');
 
-// Enjoy
-$data = $API->format(true)->search('Soldier');
+// Use custom cookie (option)
+// $api->cookie('paste your cookie');
+
+// Get data
+$data = $api->format(true)->search('Soldier', [
+    'page' => 1,
+    'limit' => 50
+]);
+
+echo $data;
+// [{"id":35847388,"name":"Hello","artist":["Adele"],"album":"Hello","pic_id":"1407374890649284","url_id":35847388,"lyric_id":35847388,"source":"netease"},{"id":33211676,"name":"Hello","artist":["OMFG"],"album":"Hello",...
+
+// Parse link
+$data = $api->format(true)->url(35847388);
+
+echo $data;
+// {"url":"http:\/\/...","size":4729252,"br":128}
 ```
 
-## Usage
-[wiki/docs](https://github.com/metowolf/Meting/wiki)
+## More usage
+ - [docs](https://github.com/metowolf/Meting/wiki)
+ - [special for netease](https://github.com/metowolf/Meting/wiki/special-for-netease)
 
-## Demo
-```bash
-$ git clone https://github.com/metowolf/NeteaseCloudMusicApi.git
-$ cd Meting
-$ php -S 127.0.0.1:8080
-```
-then open http://127.0.0.1:8080/demo/simple-test in Browser
+## Join the Discussion
+ - [Telegram Group](https://t.me/adplayer)
+ - [Official website](https://i-meto.com)
 
 ## Related Projects
- - [Hermit-X (Wordpress)](https://github.com/liwanglin12/Hermit-X)
- - [Meting for Typecho](https://github.com/metowolf/Meting-Typecho-Plugin)
+ - [Hermit-X (Wordpress)](https://github.com/MoePlayer/Hermit-X)
+ - [APlayer-Typecho](https://github.com/MoePlayer/APlayer-Typecho)
+ - [MKOnlineMusicPlayer](https://github.com/mengkunsoft/MKOnlineMusicPlayer)
+ - [WP-Player](https://github.com/webjyh/WP-Player)
 
-## License
-Meting is under the MIT license.
+## Author
 
-## Links
-Official website: https://i-meto.com  
-Demo: https://music.i-meto.com
+**Meting** © [metowolf](https://github.com/metowolf), Released under the [MIT](./LICENSE) License.<br>
+
+> Blog [@meto](https://i-meto.com) · GitHub [@metowolf](https://github.com/metowolf) · Twitter [@metowolf](https://twitter.com/metowolf) · Telegram Channel [@metooooo](https://t.me/metooooo)
